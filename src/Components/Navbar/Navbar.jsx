@@ -17,6 +17,8 @@ function Navbar({ toggleModal, toggleModalSell }) {
     const { setUser } = useContext(AuthContext)
     const navigate = useNavigate()
     const [showLogout, setShowLogout] = useState(false)
+
+
     
     const handleUserClick = () => {
         if (userData) {
@@ -29,6 +31,7 @@ function Navbar({ toggleModal, toggleModalSell }) {
             }
         }
     }
+    
 
     const handleLogout = () => {
         signOut(auth)
@@ -47,6 +50,7 @@ function Navbar({ toggleModal, toggleModalSell }) {
                 toast.error("Logout failed ");
 
             });
+            
     }
 
     return (
