@@ -33,17 +33,30 @@ function Home() {
   }, [items]);
 
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const filteredItems = useMemo(() => {
-    if (selectedCategory === "All") return items;
-    return (items || []).filter((i) => i?.category === selectedCategory);
-  }, [items, selectedCategory]);
+    let filtered = items || [];
+    if (selectedCategory !== "All") {
+      filtered = filtered.filter((i) => i?.category === selectedCategory);
+    }
+    if (searchQuery) {
+      const lowerQuery = searchQuery.toLowerCase();
+      filtered = filtered.filter((i) =>
+        i?.title?.toLowerCase().includes(lowerQuery) ||
+        i?.category?.toLowerCase().includes(lowerQuery) ||
+        i?.description?.toLowerCase().includes(lowerQuery) ||
+        i?.price?.toString().includes(lowerQuery)
+      );
+    }
+    return filtered;
+  }, [items, selectedCategory, searchQuery]);
 
 
 
   return (
     <div>
-      <Navbar toggleModal={toggleModal} toggleModalSell={toggleModalSell} />
+      <Navbar toggleModal={toggleModal} toggleModalSell={toggleModalSell} setSearchQuery={setSearchQuery} />
       <Login
         toggleModal={toggleModal}
         status={viewModal}

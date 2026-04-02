@@ -10,7 +10,7 @@ import { toast } from 'react-toastify';
 
 import './Navbar.css'
 
-function Navbar({ toggleModal, toggleModalSell }) {
+function Navbar({ toggleModal, toggleModalSell, setSearchQuery }) {
 
 
     const { userData, setUserData } = useContext(FirebaseContext)
@@ -66,7 +66,12 @@ function Navbar({ toggleModal, toggleModalSell }) {
                 </div>
 
                 <div className="ml-5 mr-2 relative w-full main-search">
-                    <input placeholder='Find Cars, Mobile Phones, and More...' className='w-full p-3 border-black border-solid border-2 rounded-md placeholder:text-ellipsis focus:outline-none focus:border-teal-300' type="text" />
+                    <input 
+                      placeholder='Find Cars, Mobile Phones, and More...' 
+                      className='w-full p-3 border-black border-solid border-2 rounded-md placeholder:text-ellipsis focus:outline-none focus:border-teal-300' 
+                      type="text" 
+                      onChange={(e) => setSearchQuery && setSearchQuery(e.target.value)}
+                    />
                     <div style={{ backgroundColor: '#002f34' }} className="flex justify-center items-center absolute top-0 right-0 h-full rounded-e-md w-12">
                     </div>
                 </div>
